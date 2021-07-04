@@ -12,7 +12,7 @@ public class Main {
         // Create a target object
         VulnerableTaskHolder go = new VulnerableTaskHolder("Wait for 5 sec", "sleep 5");
 
-        // Deserialize it
+        // Serialize it
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(go);
