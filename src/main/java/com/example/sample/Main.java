@@ -1,24 +1,25 @@
 package com.example.sample;
 
-import org.dummy.insecure.framework.VulnerableTaskHolder;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Base64;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         // Create a target object
-        VulnerableTaskHolder go = new VulnerableTaskHolder("Wait for 5 sec", "sleep 5");
+        Person person = new Person("John Doe");
 
         // Deserialize it
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(go);
+        oos.writeObject(person);
         oos.flush();
 
-        // Print a base 64 representation of the serialized object
-        System.out.println(Base64.getEncoder().encodeToString(bos.toByteArray()));
+        // Print a hex representation of the serialized object
+        StringBuilder serializedStringBuilder = new StringBuilder();
+        for (byte b : bos.toByteArray()) {
+            serializedStringBuilder.append(String.format("%02X", b));
+        }
+        System.out.println(serializedStringBuilder.toString());
     }
 }
